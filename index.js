@@ -9,10 +9,8 @@ wsServer.on('connection', (ws) => {
     console.log('connected');
 
     ws.on('message', (arrayData) => {
-        wsServer.clients.forEach(function each(client) {
-            if (client.readyState === SocketServer.OPEN) {
-              client.send(arrayData);
-            }
+        wsServer.clients.forEach(client => {
+            client.send(arrayData);
         });
         console.log(arrayData)
     });
