@@ -10,7 +10,7 @@ wsServer.on('connection', (ws) => {
 
     ws.on('message', (arrayData) => {
         wsServer.clients.forEach(function each(client) {
-            if (client.readyState === WebSocket.OPEN) {
+            if (client.readyState === ws.OPEN) {
               client.send(arrayData);
             }
         });
