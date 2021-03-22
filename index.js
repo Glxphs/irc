@@ -6,11 +6,14 @@ const server = require('express')().listen(port);
 const wsServer = new SocketServer({ server });
 
 wsServer.on('connection', (ws) => {
-
     console.log('connected');
 
     ws.on('message', (arrayData) => {
-        ws.send(arrayData)
+        wsServer.clients.forEach(function each(client) {
+            if (client.readyState === WebSocket.OPEN) {
+              client.send(arrayData);
+            }
+        });
         console.log(arrayData)
     });
 }); 
