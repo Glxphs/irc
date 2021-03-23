@@ -7,6 +7,11 @@ const wsServer = new SocketServer({ server });
 
 wsServer.on('connection', (ws) => {
     console.log('connected');
+    wsServer.clients.forEach(client => {
+        if (client != ws) {
+            client.send("User Connected.");
+        }
+    });
 
     ws.on('message', (arrayData) => {
         wsServer.clients.forEach(client => {
